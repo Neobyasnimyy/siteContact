@@ -19,7 +19,6 @@ if (!empty($_POST)===true) {
         if (file_exists($file)) {
             if ($handle = @fopen($file, "r")) {
                 while (($buffer = fgets($handle)) !== false) {
-                    $comments[] = $buffer;
                     $item = unserialize($buffer);
                     if ($item['email']==$email){
                         $message[] = "Пользователь с такой почтой уже существует.";
