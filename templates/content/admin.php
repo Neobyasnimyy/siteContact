@@ -6,7 +6,7 @@ $title = "Adminka";
 $yourfile = "register.txt";
 
 // если не зарегистрированный пользователь  перенаправляем на вход
-if (!testAuthorization()) {
+if (!($authorization=testAuthorization())) {
     header("Location: login.php");
     exit();
 }
@@ -31,6 +31,7 @@ if (!empty($_POST['fontColor']) === true) {
             // перезаписываем наш файл с регистрацией
             if (file_put_contents($yourfile, implode("", $file),LOCK_EX) !== false) {
                 $message[] = "Смена фона успешно произведена.";
+                // как в этом случае очистить запрос, чтобы при обновлении страницы не повторялся?
             }else{
                 $message[] = "Ошибка записи данных.";
             }
@@ -95,7 +96,7 @@ if ((!empty($_POST['oldPassword']) === true) and (!empty($_POST['newPassword']) 
                     <?php endforeach; ?>
                 </div><br>
             <?php endif; ?>
-            <h4 align="left">Поменять цвет фона</h4>
+            <h4 align="left">Поменять цвет фона сайта</h4>
             <form class="form-inline" action="" method="POST">
 
                 <div class="form-group">

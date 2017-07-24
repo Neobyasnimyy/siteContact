@@ -13,7 +13,7 @@ if (!empty($_POST)===true) {
     if (empty($password) === true || empty($email) === true) {
         $message[] = "Каждое поле должно быть заполненно";
     } else {
-        // проверка что такой пользователь у нас не зарегестрирован по email и паролю
+        // проверка что такой пользователь у нас зарегестрирован по email и паролю
         if (file_exists($file)) {
             if ($handle = @fopen($file, "r")) {
                 while (($buffer = fgets($handle)) !== false) {
@@ -27,6 +27,7 @@ if (!empty($_POST)===true) {
                         $_SESSION['Authorization']['ip']=$_SERVER['REMOTE_ADDR'];
                         $_SESSION['Authorization']['name']=$item['name'];
                         $_SESSION['Authorization']['email']=$email;
+                        $_SESSION['Authorization']['fontColor']=$item['fontColor'];
                         setcookie('name', $item['name'], time() + (60*60*24),'/');
                         header('Location: home.php'); // редирект, на главную страницу
                         exit();
@@ -43,7 +44,7 @@ if (!empty($_POST)===true) {
     }
 }else{
     // если активный пользователь и попал на вход перенаправляем на главную
-    if (testAuthorization()){
+    if ($authorization=testAuthorization()){
         header("Location: home.php");
         exit();
     }

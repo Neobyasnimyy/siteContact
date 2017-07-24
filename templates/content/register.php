@@ -55,6 +55,7 @@ if (!empty($_POST)===true) {
                 $text['name'] = $name;
                 $text['password'] = $password;
                 $text['email'] = $email;
+                $text['fontColor'] = 'whitesmoke';// по умолчанию при регистрации
                 flock($handle, LOCK_EX);//Блокировка файла,на запись другими процессами
                 fwrite($handle, serialize($text) . PHP_EOL);
                 flock($handle, LOCK_UN);//СНЯТИЕ БЛОКИРОВКИ
@@ -66,6 +67,7 @@ if (!empty($_POST)===true) {
                 $_SESSION['Authorization']['ip']=$_SERVER['REMOTE_ADDR'];
                 $_SESSION['Authorization']['name']=$name;
                 $_SESSION['Authorization']['email']=$email;
+                $_SESSION['Authorization']['fontColor']='whitesmoke'; // по умолчанию при регистрации
                 setcookie('name', $name, time() + (60*60*24),'/');
                 header('Content-Type: text/html; charset=utf-8');
                 header('Location: home.php'); // редирект, на главную страницу
@@ -77,7 +79,7 @@ if (!empty($_POST)===true) {
     }
 }
 // если активный пользователь и попал на регистрацию перенаправляем на главную
-if (testAuthorization()){
+if ($authorization=testAuthorization()){
     header("Location: home.php");
     exit();
 }
