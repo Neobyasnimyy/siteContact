@@ -1,0 +1,24 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 60px;
+}
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
+#footer ul {
+    text-align: center;
+}
+
+.navbar a{
+     color: blue;
+ }
+.content p{
+    text-align: justify;
+    text-indent: 40px;
+}
