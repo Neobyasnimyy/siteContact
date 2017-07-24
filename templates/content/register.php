@@ -1,8 +1,8 @@
 <?php
 
-
 require 'myFun/testAuthorization.php';
 
+$title="Register";
 $file = "register.txt";
 
 if (!empty($_POST)===true) {
@@ -65,7 +65,9 @@ if (!empty($_POST)===true) {
                 $_SESSION['Authorization']['id'] = session_id();
                 $_SESSION['Authorization']['ip']=$_SERVER['REMOTE_ADDR'];
                 $_SESSION['Authorization']['name']=$name;
+                $_SESSION['Authorization']['email']=$email;
                 setcookie('name', $name, time() + (60*60*24),'/');
+                header('Content-Type: text/html; charset=utf-8');
                 header('Location: home.php'); // редирект, на главную страницу
                 exit();
             } else {
@@ -103,7 +105,7 @@ if (testAuthorization()){
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-md-4 control-label">Пароль</label>
+                    <label for="name" class="col-md-4 control-label">Пароль :</label>
                     <div class="col-md-8">
                         <input type="password" class="form-control" name="password" id="name" placeholder="Имя" >
                     </div>

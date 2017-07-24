@@ -1,7 +1,7 @@
 <?php
 
 require 'myFun/testAuthorization.php';
-
+$title="LogIn";
 $file = "register.txt";
 
 if (!empty($_POST)===true) {
@@ -26,6 +26,7 @@ if (!empty($_POST)===true) {
                         $_SESSION['Authorization']['id'] = session_id();
                         $_SESSION['Authorization']['ip']=$_SERVER['REMOTE_ADDR'];
                         $_SESSION['Authorization']['name']=$item['name'];
+                        $_SESSION['Authorization']['email']=$email;
                         setcookie('name', $item['name'], time() + (60*60*24),'/');
                         header('Location: home.php'); // редирект, на главную страницу
                         exit();
@@ -82,6 +83,7 @@ if (!empty($_POST)===true) {
 
                     <div class="form-group">
                         <div class=" text-right ">
+                            <a href="register.php" class="btn btn-primary">Регистрация</a>
                             <button type="submit" class="btn btn-primary">Войти</button>
                         </div>
                     </div>
