@@ -37,7 +37,7 @@
                 <div class="navbar-collapse ">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="home.php">Главная</a></li>
-                        <li><a href="#about">Контакт</a></li>
+                        <li><a href="contact.php">Контакт</a></li>
                         <li><a href="articles.php">Статьи</a></li>
                         <li><a href="product.php">Продукция</a></li>
                     </ul>
