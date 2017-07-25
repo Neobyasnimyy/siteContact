@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require_once 'myFun/testAuthorization.php';
 
 $title = 'Продукция';
@@ -42,10 +42,11 @@ if (!empty($_POST) === true) {
     }
 
 }
+
 //$style = '../../style/home.css';
 
 include '../headAndHeader.php';
-
+ob_end_flush();
 ?>
 
     <div class="container">
