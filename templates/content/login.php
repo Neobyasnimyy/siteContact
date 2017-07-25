@@ -42,12 +42,12 @@ if (!empty($_POST)===true) {
         // если не нашли запись вывести сообщение
         $message[] = "Ошибка входа. Проверьте логин и пароль.";
     }
-}else{
-    // если активный пользователь и попал на вход перенаправляем на главную
-    if ($authorization=testAuthorization()){
-        header("Location: home.php");
-        exit();
-    }
+}
+
+// если активный пользователь и попал на вход перенаправляем на главную
+if ($authorization=testAuthorization()){
+    header("Location: home.php");
+    exit();
 }
 
 
