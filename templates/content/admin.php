@@ -30,8 +30,9 @@ if (!empty($_POST['fontColor']) === true) {
         if ($find==true){
             // перезаписываем наш файл с регистрацией
             if (file_put_contents($yourfile, implode("", $file),LOCK_EX) !== false) {
-                $message[] = "Смена фона успешно произведена.";
-                // как в этом случае очистить запрос, чтобы при обновлении страницы не повторялся?
+                // делаем перенаправления и очищаем пост запрос
+                header("Location: admin.php?setColor");
+                exit();
             }else{
                 $message[] = "Ошибка записи данных.";
             }
@@ -69,7 +70,8 @@ if ((!empty($_POST['oldPassword']) === true) and (!empty($_POST['newPassword']) 
             if ($find==true){
                 // перезаписываем наш файл с регистрацией
                 if (file_put_contents($yourfile, implode("", $file),LOCK_EX) !== false) {
-                    $message[] = "Смена пароля успешно произведена.";
+                    header("Location: admin.php?setPassword");
+                    exit();
                 }else{
                     $message[] = "Ошибка записи данных.";
                 }
@@ -89,6 +91,18 @@ if ((!empty($_POST['oldPassword']) === true) and (!empty($_POST['newPassword']) 
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+            <?php if(isset($_GET['setColor'])):?>
+                <div class="alert alert-success" role="alert" >
+                    <p align="center" >Смена фона успешно произведена.</p>
+                </div>
+            <?php endif;?>
+
+            <?php if(isset($_GET['setPassword'])):?>
+                <div class="alert alert-success" role="alert" >
+                    <p align="center" >Смена пароля успешно произведена.</p>
+                </div>
+            <?php endif;?>
+
             <?php if (empty($message) === false): ?>
                 <div class="alert alert-info" role="alert">
                     <?php foreach ($message as $error): ?>
@@ -97,7 +111,7 @@ if ((!empty($_POST['oldPassword']) === true) and (!empty($_POST['newPassword']) 
                 </div><br>
             <?php endif; ?>
             <h4 align="left">Поменять цвет фона сайта</h4>
-            <form class="form-inline" action="" method="POST">
+            <form class="form-inline" action="admin.php" method="POST">
 
                 <div class="form-group">
                     <label for="color" class="control-label">Выбрать </label>
@@ -126,7 +140,7 @@ if ((!empty($_POST['oldPassword']) === true) and (!empty($_POST['newPassword']) 
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
             <h4 align="left">Поменять пароль</h4>
-            <form class="form-inline" action="" method="POST" novalidate>
+            <form class="form-inline" action="admin.php" method="POST" novalidate>
                 <div class="form-group">
                     <input type="password" class="form-control" name="oldPassword" placeholder="Старый пароль" required>
                 </div>
